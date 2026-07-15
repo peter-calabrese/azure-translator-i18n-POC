@@ -1,0 +1,26 @@
+[
+  {
+    "translations": [
+      {
+        "text": "こんにちは、世界",
+        "to": "ja"
+      },
+      {
+        "text": "Hola Mundo",
+        "to": "es"
+      }
+    ]
+  },
+  {
+    "translations": [
+      {
+        "text": "また会いました!",
+        "to": "ja"
+      },
+      {
+        "text": "¡Hola de nuevo!",
+        "to": "es"
+      }
+    ]
+  }
+]

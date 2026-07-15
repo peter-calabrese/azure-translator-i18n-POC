@@ -1,4 +1,5 @@
 import { flattenTranslations } from "./flattenTranslations.js";
+import { translateObject } from "./translationService.js";
 
 const translations = {
   common: {
@@ -11,7 +12,14 @@ const translations = {
   }
 };
 
-console.log(flattenTranslations(translations).map(
-    entry => ({ Text: entry.text })
-));
+const flattened = flattenTranslations(translations);
+
+async function main() {
+  const targetLanguages = ["es", "fr"];
+  const translationEntries = flattened.map(entry => ({ text: entry.text }));
+
+  await translateObject(translationEntries, targetLanguages);
+}
+
+main().catch(console.error);
 
