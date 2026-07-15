@@ -24,5 +24,5 @@ export async function loadLocales(language: string) {
     }),
   );
 
-  return resources
+  return resources;
 }

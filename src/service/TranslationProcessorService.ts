@@ -28,30 +28,31 @@ export class TranslationProcessorService {
         targetLanguages,
       );
 
-      const translations = response.reduce<
-        Record<string, string[]>
-      >((languages, result) => {
-        for (const translation of result.translations) {
-          languages[translation.to] ??= [];
-          languages[translation.to]!.push(translation.text);
-        }
-        return languages;
-      }, {});
+      const translations = response.reduce<Record<string, string[]>>(
+        (languages, result) => {
+          for (const translation of result.translations) {
+            languages[translation.to] ??= [];
+            languages[translation.to]!.push(translation.text);
+          }
+          return languages;
+        },
+        {},
+      );
 
       Object.entries(translations).forEach(([lang, texts]) => {
-        if(!texts) throw new Error(`No translations found for language: ${lang}`);
+        if (!texts)
+          throw new Error(`No translations found for language: ${lang}`);
 
         const rebuiltTranslations = texts.reduce<Record<string, unknown>>(
           (result, translatedText, index) => {
-
             const originalPath = flattenedTranslations[index]?.path || [];
-            
+
             let current = result;
             for (const key of originalPath.slice(0, -1)) {
-            current[key] ??= {};
-            current = current[key] as Record<string, unknown>;
+              current[key] ??= {};
+              current = current[key] as Record<string, unknown>;
             }
-              current[originalPath.at(-1)!] = translatedText;
+            current[originalPath.at(-1)!] = translatedText;
 
             return result;
           },
@@ -86,6 +87,4 @@ export class TranslationProcessorService {
 
     return [];
   }
-
-
 }
