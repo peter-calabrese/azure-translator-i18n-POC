@@ -87,18 +87,5 @@ export class TranslationProcessorService {
     return [];
   }
 
-  private setNestedValue(
-    object: Record<string, unknown>,
-    propertyPath: string[],
-    value: string,
-  ) {
-    let current = object;
-    
-    for (const key of propertyPath.slice(0, -1)) {
-      current[key] ??= {};
-      current = current[key] as Record<string, unknown>;
-    }
 
-    current[propertyPath.at(-1)!] = value;
-  }
 }
